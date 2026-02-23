@@ -120,8 +120,8 @@ def build_invalid_format_item():
     help_text = "Use: hd 46m | hd 1:30 | hd 1h20m | hm 1.56 | hm 1.5+0.25"
     return ExtensionResultItem(
         icon="images/icon.png",
-        name="Formato inválido",
-        description="Use: hd 46m, hd 1:30, hd 1h20m, hm 1.56, hm 1.5+0.25",
+        name="Formato inválido / Invalid format",
+        description="Use/Use exemplos: hd 46m, hd 1:30, hd 1h20m, hm 1.56, hm 1.5+0.25",
         on_enter=CopyToClipboardAction(help_text),
     )
 
@@ -144,13 +144,13 @@ class DecimalHoursQueryListener(EventListener):
                     ExtensionResultItem(
                         icon="images/icon.png",
                         name=f"{decimal_text} ({hhmm})",
-                        description="ENTER copia decimal",
+                        description="ENTER: copiar hora decimal / copy decimal hours",
                         on_enter=CopyToClipboardAction(decimal_text),
                     ),
                     ExtensionResultItem(
                         icon="images/icon.png",
                         name=f"Copiar HH:MM: {hhmm}",
-                        description="ENTER copia HH:MM",
+                        description="ENTER: copiar HH:MM / copy HH:MM",
                         on_enter=CopyToClipboardAction(hhmm),
                     ),
                 ])
@@ -164,13 +164,13 @@ class DecimalHoursQueryListener(EventListener):
                     ExtensionResultItem(
                         icon="images/icon.png",
                         name=f"{hm_text} ({hhmm})",
-                        description="ENTER copia HhMm",
+                        description="ENTER: copiar HhMm / copy HhMm",
                         on_enter=CopyToClipboardAction(hm_text),
                     ),
                     ExtensionResultItem(
                         icon="images/icon.png",
                         name=f"Copiar HH:MM: {hhmm}",
-                        description="ENTER copia HH:MM",
+                        description="ENTER: copiar HH:MM / copy HH:MM",
                         on_enter=CopyToClipboardAction(hhmm),
                     ),
                 ])
