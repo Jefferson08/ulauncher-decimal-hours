@@ -1,0 +1,23 @@
+{
+  "required_api_version": "2",
+  "name": "Decimal Hours Converter",
+  "description": "Convert decimal hours ↔ HH:MM with expressions and smart parsing",
+  "developer_name": "Jefferson Carvalho",
+  "icon": "images/icon.png",
+  "preferences": [
+    {
+      "id": "keyword_decimal",
+      "type": "keyword",
+      "name": "Keyword decimal -> HH:MM",
+      "description": "Use this keyword to convert decimal hours to HH:MM",
+      "default_value": "hd"
+    },
+    {
+      "id": "keyword_minutes",
+      "type": "keyword",
+      "name": "Keyword HH:MM -> decimal",
+      "description": "Use this keyword to convert HH:MM/minutes to decimal hours",
+      "default_value": "hm"
+    }
+  ]
+}
