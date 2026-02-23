@@ -4,6 +4,7 @@ import re
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.shared.action.CopyToClipboardAction import CopyToClipboardAction
+from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.event import KeywordQueryEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 
@@ -133,7 +134,7 @@ class DecimalHoursQueryListener(EventListener):
                 hhmm = decimal_hours_to_hhmm(decimal_total)
                 decimal_text = f"{decimal_total:.2f}"
 
-                return [
+                return RenderResultListAction([
                     ExtensionResultItem(
                         icon="images/icon.png",
                         name=f"{hhmm} ({decimal_text})",
@@ -146,14 +147,14 @@ class DecimalHoursQueryListener(EventListener):
                         description="ENTER copia HH:MM",
                         on_enter=CopyToClipboardAction(hhmm),
                     ),
-                ]
+                ])
 
             if keyword == keyword_minutes:
                 total_minutes = parse_hm_input(argument)
                 hhmm = format_hhmm_from_minutes(total_minutes)
                 decimal_text = f"{(total_minutes / 60):.2f}"
 
-                return [
+                return RenderResultListAction([
                     ExtensionResultItem(
                         icon="images/icon.png",
                         name=f"{decimal_text} ({hhmm})",
@@ -166,12 +167,12 @@ class DecimalHoursQueryListener(EventListener):
                         description="ENTER copia HH:MM",
                         on_enter=CopyToClipboardAction(hhmm),
                     ),
-                ]
+                ])
 
         except Exception:
-            return [build_invalid_format_item()]
+            return RenderResultListAction([build_invalid_format_item()])
 
-        return [build_invalid_format_item()]
+        return RenderResultListAction([build_invalid_format_item()])
 
 
 class DecimalHoursExtension(Extension):
