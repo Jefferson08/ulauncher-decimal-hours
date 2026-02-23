@@ -20,7 +20,6 @@ ALLOWED_AST_NODES = (
     ast.USub,
     ast.UAdd,
     ast.Constant,
-    ast.Num,
     ast.Load,
 )
 
@@ -42,9 +41,6 @@ def _eval_node(node):
         if not isinstance(node.value, (int, float)):
             raise ValueError("Only numeric constants are allowed")
         return node.value
-
-    if isinstance(node, ast.Num):
-        return node.n
 
     if isinstance(node, ast.UnaryOp):
         value = _eval_node(node.operand)
