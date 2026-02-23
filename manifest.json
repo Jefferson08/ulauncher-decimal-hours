@@ -8,15 +8,15 @@
     {
       "id": "keyword_decimal",
       "type": "keyword",
-      "name": "Keyword decimal -> HH:MM",
-      "description": "Use this keyword to convert decimal hours to HH:MM",
+      "name": "Keyword minutes/HH:MM -> decimal",
+      "description": "Use this keyword to convert minutes/HH:MM to decimal hours",
       "default_value": "hd"
     },
     {
       "id": "keyword_minutes",
       "type": "keyword",
-      "name": "Keyword HH:MM -> decimal",
-      "description": "Use this keyword to convert HH:MM/minutes to decimal hours",
+      "name": "Keyword decimal -> HhMm",
+      "description": "Use this keyword to convert decimal hours to HhMm",
       "default_value": "hm"
     }
   ]

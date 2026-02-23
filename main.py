@@ -81,6 +81,16 @@ def decimal_hours_to_hhmm(value):
     return format_hhmm_from_minutes(minutes)
 
 
+def format_hhmm_to_hm(hhmm):
+    sign = ""
+    text = hhmm
+    if hhmm.startswith("-"):
+        sign = "-"
+        text = hhmm[1:]
+    hours, minutes = text.split(":")
+    return f"{sign}{int(hours)}h{int(minutes)}m"
+
+
 def parse_hm_input(value):
     text = value.strip().lower().replace(" ", "")
     if not text:
@@ -107,11 +117,11 @@ def parse_hm_input(value):
 
 
 def build_invalid_format_item():
-    help_text = "Use: hd 1.5 | hd 1.5+2.25 | hm 1:30 | hm 1h20m | hm 90m"
+    help_text = "Use: hd 46m | hd 1:30 | hd 1h20m | hm 1.56 | hm 1.5+0.25"
     return ExtensionResultItem(
         icon="images/icon.png",
         name="Formato inválido",
-        description="Use: hd 1.5, hd 1.5+2.25, hm 1:30, hm 1h20m, hm 90m",
+        description="Use: hd 46m, hd 1:30, hd 1h20m, hm 1.56, hm 1.5+0.25",
         on_enter=CopyToClipboardAction(help_text),
     )
 
@@ -126,14 +136,14 @@ class DecimalHoursQueryListener(EventListener):
 
         try:
             if keyword == keyword_decimal:
-                decimal_total = safe_eval_expression(argument)
-                hhmm = decimal_hours_to_hhmm(decimal_total)
-                decimal_text = f"{decimal_total:.2f}"
+                total_minutes = parse_hm_input(argument)
+                hhmm = format_hhmm_from_minutes(total_minutes)
+                decimal_text = f"{(total_minutes / 60):.2f}"
 
                 return RenderResultListAction([
                     ExtensionResultItem(
                         icon="images/icon.png",
-                        name=f"{hhmm} ({decimal_text})",
+                        name=f"{decimal_text} ({hhmm})",
                         description="ENTER copia decimal",
                         on_enter=CopyToClipboardAction(decimal_text),
                     ),
@@ -146,16 +156,16 @@ class DecimalHoursQueryListener(EventListener):
                 ])
 
             if keyword == keyword_minutes:
-                total_minutes = parse_hm_input(argument)
-                hhmm = format_hhmm_from_minutes(total_minutes)
-                decimal_text = f"{(total_minutes / 60):.2f}"
+                decimal_total = safe_eval_expression(argument.replace(",", "."))
+                hhmm = decimal_hours_to_hhmm(decimal_total)
+                hm_text = format_hhmm_to_hm(hhmm)
 
                 return RenderResultListAction([
                     ExtensionResultItem(
                         icon="images/icon.png",
-                        name=f"{decimal_text} ({hhmm})",
-                        description="ENTER copia decimal",
-                        on_enter=CopyToClipboardAction(decimal_text),
+                        name=f"{hm_text} ({hhmm})",
+                        description="ENTER copia HhMm",
+                        on_enter=CopyToClipboardAction(hm_text),
                     ),
                     ExtensionResultItem(
                         icon="images/icon.png",
