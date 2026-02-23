@@ -9,12 +9,12 @@ Converte `minutos/HH:MM` para horas decimais e horas decimais para `HhMm`.
 
 ## Exemplos
 
-- `hd 46m`
-- `hd 1:30`
-- `hd 1h20m`
-- `hd 90`
-- `hm 1.56`
-- `hm 1.5+0.25`
+- `hd 46m` -> `0.77 (0:46)`
+- `hd 1:30` -> `1.50 (1:30)`
+- `hd 1h20m` -> `1.33 (1:20)`
+- `hd 90` -> `1.50 (1:30)`
+- `hm 1.56` -> `1h34m (1:34)`
+- `hm 1.5+0.25` -> `1h45m (1:45)`
 
 ## Instalação pública
 
