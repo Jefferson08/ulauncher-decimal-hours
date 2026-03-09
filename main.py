@@ -81,6 +81,10 @@ def decimal_hours_to_hhmm(value):
     return format_hhmm_from_minutes(minutes)
 
 
+def format_decimal_hours(value):
+    return f"{value:.2f}".replace(".", ",")
+
+
 def format_hhmm_to_hm(hhmm):
     sign = ""
     text = hhmm
@@ -138,7 +142,7 @@ class DecimalHoursQueryListener(EventListener):
             if keyword == keyword_decimal:
                 total_minutes = parse_hm_input(argument)
                 hhmm = format_hhmm_from_minutes(total_minutes)
-                decimal_text = f"{(total_minutes / 60):.2f}"
+                decimal_text = format_decimal_hours(total_minutes / 60)
 
                 return RenderResultListAction([
                     ExtensionResultItem(
